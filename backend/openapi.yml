@@ -10,7 +10,7 @@ servers:
 paths:
   /products:
     get:
-      summary: Retrieve all products
+      summary: Retrieve all products with pagination
       parameters:
         - in: query
           name: start
@@ -71,7 +71,7 @@ paths:
 
   /search:
     get:
-      summary: Search for products using a fuzzy search algorithm
+      summary: Search for products using a fuzzy search algorithm with pagination
       parameters:
         - in: query
           name: q

@@ -1,18 +1,15 @@
-import express, { Request, Response } from 'express';
-import cors from 'cors';
+import express from "express";
+import cors from "cors";
+import productRoutes from "./routes/productRoutes";
 
 const app = express();
+
 // Enable CORS for all routes
 app.use(cors());
+app.use(express.json());
+app.use("/api", productRoutes);
 
 const port = process.env.PORT || 3000;
-
-app.use(express.json());
-
-app.get('/', (req: Request, res: Response) => {
-    res.send('Hello, world!');
-});
-
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
