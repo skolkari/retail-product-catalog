@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc -p ./tsconfig.json",
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "populate-data": "npx ts-node ./src/populate-data/populateFromScript.ts"
   },
   "author": "Salma Kolkari",
   "license": "ISC",
