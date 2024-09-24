@@ -1,3 +1,5 @@
+import { fuzzySearch } from "./fuzzySearchService";
+
 interface Product {
   id: string;
   name: string;
@@ -71,9 +73,8 @@ export const searchProducts = (
   startPage: number,
   limit: number
 ): PaginatedProducts => {
-  // TODO: Implement the fuzzy search functionality
   const filteredProducts = products.filter((product) =>
-    product.name.split(" ").join().toLowerCase().includes(query.toLowerCase())
+    fuzzySearch(product.name, query, 2)
   );
   const start = (startPage - 1) * limit;
   const end = start + limit;
