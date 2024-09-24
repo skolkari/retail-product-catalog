@@ -1,6 +1,6 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import "./Searchbar.css";
-import { debounce, throttle } from "../utils";
+import { throttle } from "../utils";
 
 interface SearchbarProps {
   searchText: string;
@@ -8,24 +8,18 @@ interface SearchbarProps {
 }
 
 const Searchbar = ({ searchText, onSearch }: SearchbarProps) => {
-  // Debounced search function
-  const debouncedSearch = useCallback(
-    debounce((text: string) => {
-      onSearch(text);
-    }, 500),
-    []
-  );
-
+  const [searchTerm, setSearchTerm] = useState(searchText);
   // Throttled input handler
   const throttledInputHandler = useCallback(
     throttle((text: string) => {
-      debouncedSearch(text);
+      onSearch(text);
     }, 300),
     []
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const text = e.target.value;
+    setSearchTerm(text);
     throttledInputHandler(text); // Use throttled input handler
   };
 
@@ -35,7 +29,7 @@ const Searchbar = ({ searchText, onSearch }: SearchbarProps) => {
         type="search"
         placeholder="Search products..."
         className="search-input"
-        value={searchText}
+        value={searchTerm}
         onChange={handleChange}
       />
       <button className="search-btn" onClick={() => onSearch(searchText)}>

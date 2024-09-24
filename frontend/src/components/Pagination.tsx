@@ -31,8 +31,6 @@ const Pagination: React.FC<PaginationProps> = ({
     const pages = [];
     const maxPagesToShow = 5; // Maximum number of pages to display in the pagination
     const sidePagesToShow = Math.floor(maxPagesToShow / 2); // Number of pages to show on each side of the current page
-    console.log("sidePagesToShow", sidePagesToShow);
-    console.log("totalPages", totalPages);
 
     // If the total number of pages is less than or equal to the maximum pages to show
     if (totalPages <= maxPagesToShow) {
@@ -75,8 +73,6 @@ const Pagination: React.FC<PaginationProps> = ({
         pages.push("..", totalPages);
       }
     }
-
-    console.log("pages", pages);
 
     return pages;
   };
