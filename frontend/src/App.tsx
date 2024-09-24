@@ -1,9 +1,21 @@
 import { useState } from "react";
 import "./App.css";
 import { Searchbar } from "./components";
+import { ProductListView, ProductDetailView } from "./features/product";
 
 function App() {
   const [searchText, setSearchText] = useState("");
+  const [productId, setProductId] = useState("");
+  const [showProductDetails, setShowProductDetails] = useState(false);
+
+  const handleProductClick = (id: string) => {
+    setProductId(id);
+    setShowProductDetails(true);
+  };
+
+  const handleBackClick = () => {
+    setShowProductDetails(false);
+  };
 
   return (
     <div className="page-container">
@@ -11,12 +23,22 @@ function App() {
         <h1>Retail Product Catalog</h1>
       </header>
 
-      <Searchbar
-        searchText={searchText}
-        onSearch={(searchText) => {
-          setSearchText(searchText);
-        }}
-      />
+      {showProductDetails ? (
+        <ProductDetailView id={productId} backToProductList={handleBackClick} />
+      ) : (
+        <>
+          <Searchbar
+            searchText={searchText}
+            onSearch={(searchText) => {
+              setSearchText(searchText);
+            }}
+          />
+          <ProductListView
+            searchText={searchText}
+            handleProductClick={handleProductClick}
+          />
+        </>
+      )}
     </div>
   );
 }
